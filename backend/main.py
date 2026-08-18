@@ -1,6 +1,6 @@
 from fastapi import FastAPI,UploadFile
 import fitz
-from schemas.schemas import Block,PageResult,ProcessResponse
+from backend.schemas.schemas import Block,PageResult,ProcessResponse
 app=FastAPI()
 
 @app.post("/process",response_model=ProcessResponse)
@@ -31,11 +31,29 @@ async def process_pdf(file:UploadFile) -> ProcessResponse:
                 content=f"[placeholder:image {img_index} detected, {len(base_image['image'])} bytes]"
             ))
 
+        tables=page.find_tables()
+        for table_index,table in enumerate(tables.tables):
+            table_data=table.extract()
+    
+            table_content=""
+            for row in table_data:
+                table_content+=" | ".join(
+                    str(cell) if cell is not None else ""
+                    for cell in row
+        )
+        table_content+="\n"
+
+        blocks.append(Block(
+        type='table',
+        content=table_content.strip()
+            ))
+
         pages_result.append(PageResult(
             page_number=i+1,
             blocks=blocks))
 
 
     return ProcessResponse(pages=pages_result)
+
     
 
