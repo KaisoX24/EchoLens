@@ -12,7 +12,6 @@ interface Props {
 function OutputPanel({ result }: Props) {
   const [activePage, setActivePage] = useState(1);
 
-  // When a new PDF is processed, start from Page 1
   useEffect(() => {
     setActivePage(1);
   }, [result]);
