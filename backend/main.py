@@ -50,10 +50,28 @@ async def process_pdf(file:UploadFile) -> ProcessResponse:
                     content=desc
                 ))
 
+        tables=page.find_tables()
+        for table_index,table in enumerate(tables.tables):
+            table_data=table.extract()
+    
+            table_content=""
+            for row in table_data:
+                table_content+=" | ".join(
+                    str(cell) if cell is not None else ""
+                    for cell in row
+        )
+        table_content+="\n"
+
+        blocks.append(Block(
+        type='table',
+        content=table_content.strip()
+            ))
+
         pages_result.append(PageResult(
             page_number=i+1,
             blocks=blocks))
 
     return ProcessResponse(pages=pages_result)
+
     
 
