@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import type { ProcessResponse } from "../services/api";
 
 import PageTabs from "./PageTabs";
@@ -7,16 +6,15 @@ import AudioPlayer from "./AudioPlayer";
 
 interface Props {
   result: ProcessResponse | null;
+  activePage: number;
+  setActivePage: (page: number) => void;
 }
 
-function OutputPanel({ result }: Props) {
-  const [activePage, setActivePage] = useState(1);
-
-  useEffect(() => {
-    setActivePage(1);
-  }, [result]);
-
-  // Nothing processed yet
+function OutputPanel({
+  result,
+  activePage,
+  setActivePage,
+}: Props) {
   if (!result) {
     return (
       <section className="output-panel">
@@ -27,8 +25,8 @@ function OutputPanel({ result }: Props) {
         <div className="empty-output">
           <p>
             Upload a PDF and click{" "}
-            <strong>Process File</strong> to see the
-            processed content here.
+            <strong>Process File</strong> to see
+            the processed content here.
           </p>
         </div>
       </section>
@@ -62,13 +60,15 @@ function OutputPanel({ result }: Props) {
       />
 
       <div className="content-area">
-        {currentPage?.blocks.map((block, index) => (
-          <ContentBlock
-            key={index}
-            type={block.type}
-            content={block.content}
-          />
-        ))}
+        {currentPage?.blocks.map(
+          (block, index) => (
+            <ContentBlock
+              key={index}
+              type={block.type}
+              content={block.content}
+            />
+          )
+        )}
       </div>
 
       {result.audio_url && <AudioPlayer />}

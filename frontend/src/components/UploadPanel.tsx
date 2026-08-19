@@ -3,10 +3,14 @@ import { useState } from "react";
 import { processPDF } from "../services/api";
 
 interface Props {
+  onFileSelected: (file: File) => void;
   onProcessed: (result: any) => void;
 }
 
-function UploadPanel({ onProcessed }: Props) {
+function UploadPanel({
+  onFileSelected,
+  onProcessed,
+}: Props) {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -22,9 +26,9 @@ function UploadPanel({ onProcessed }: Props) {
     }
 
     setFile(selectedFile);
+    onFileSelected(selectedFile);
     setError("");
   };
-
   const handleProcess = async () => {
     if (!file) return;
 
