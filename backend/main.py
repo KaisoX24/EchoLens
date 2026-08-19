@@ -1,10 +1,22 @@
 from fastapi import FastAPI,UploadFile
-import fitz
-from backend.schemas.schemas import Block,PageResult,ProcessResponse
-from backend.reasoning.table_describer import describe_tables_batch
-from backend.reasoning.vision_describer import describe_images_batch
+from schemas.schemas import Block,PageResult,ProcessResponse
+from reasoning.table_describer import describe_tables_batch
+from reasoning.vision_describer import describe_images_batch
+import pymupdf
+from fastapi.middleware.cors import CORSMiddleware
 
 app=FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/process",response_model=ProcessResponse)
 async def process_pdf(file:UploadFile) -> ProcessResponse:
