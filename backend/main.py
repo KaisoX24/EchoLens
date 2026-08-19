@@ -1,6 +1,9 @@
 from fastapi import FastAPI,UploadFile
 import fitz
-from schemas.schemas import Block,PageResult,ProcessResponse
+from backend.schemas.schemas import Block,PageResult,ProcessResponse
+from backend.reasoning.table_describer import describe_tables_batch
+from backend.reasoning.vision_describer import describe_images_batch
+
 app=FastAPI()
 
 @app.post("/process",response_model=ProcessResponse)
@@ -22,19 +25,34 @@ async def process_pdf(file:UploadFile) -> ProcessResponse:
                 content=page_text
             ))
 
+        table_list=page.find_tables()
+        all_rows=[table.extract() for table in table_list] if table_list.tables else []
+        if all_rows:
+            table_description=describe_tables_batch(all_rows)
+            for desc in table_description:
+                blocks.append(Block(
+                    type='table_description',
+                    content=desc
+                ))
+
         image_list=page.get_images(full=True)
-        for img_index,img in enumerate(image_list):
+        images_data=[]
+        for img in image_list:
             xref=img[0]
             base_image=doc.extract_image(xref=xref)
-            blocks.append(Block(
-                type='visual_description',
-                content=f"[placeholder:image {img_index} detected, {len(base_image['image'])} bytes]"
-            ))
+            images_data.append((base_image['image'],base_image['ext']))
+
+        if images_data:
+            descrption=describe_images_batch(images_data)
+            for desc in descrption:
+                blocks.append(Block(
+                    type='visual_description',
+                    content=desc
+                ))
 
         pages_result.append(PageResult(
             page_number=i+1,
             blocks=blocks))
-
 
     return ProcessResponse(pages=pages_result)
     
