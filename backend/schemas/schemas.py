@@ -11,8 +11,10 @@ class PageResult(BaseModel):
 
 class ProcessResponse(BaseModel):
     pages:list[PageResult]
-    audio_url:Optional[str]=None
+
+class TTSRequest(BaseModel):
+    text:str
+    cache_key:str
 
 class DescriptionList(BaseModel):
     descriptions:list[str]
-
