@@ -1,0 +1,863 @@
+/* ================================
+   EchoLens - Global Styles
+================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family:
+    Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+
+  color: #172033;
+  background: #eef5fb;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eaf4fc, #f5f9fd);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ================================
+   Main App
+================================ */
+
+.app {
+  min-height: 100vh;
+  padding: 32px 48px;
+}
+
+/* ================================
+   Header
+================================ */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.header p {
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 15px;
+}
+
+.api-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 8px 14px;
+  border-radius: 10px;
+
+  background: #e5f8e9;
+  color: #287a3d;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.api-status svg {
+  fill: #4caf50;
+}
+
+/* ================================
+   Dashboard
+================================ */
+
+.dashboard {
+  display: grid;
+
+  grid-template-columns: minmax(360px, 42%) minmax(0, 58%);
+
+  gap: 24px;
+
+  height: calc(100vh - 150px);
+
+  min-height: 0;
+
+  align-items: stretch;
+}
+
+.document-panel {
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+
+  min-width: 0;
+  min-height: 0;
+
+  height: 100%;
+}
+
+/* ================================
+   Upload Panel
+================================ */
+
+.upload-panel {
+  flex: 0 0 auto;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  border: 1px solid #dce6ef;
+  border-radius: 14px;
+
+  padding: 18px;
+
+  box-shadow:
+    0 8px 25px rgba(58, 88, 118, 0.08);
+}
+
+.upload-panel h2 {
+  font-size: 19px;
+  margin-bottom: 22px;
+  color: #1e293b;
+}
+
+/* ================================
+   Drop Zone
+================================ */
+
+.drop-zone {
+  min-height: 120px;
+
+  border: 2px dashed #aebdca;
+
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  color: #64748b;
+
+  background: #f8fbfe;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.drop-zone:hover {
+  border-color: #3b82f6;
+  background: #f1f7ff;
+}
+
+.drop-zone svg {
+  margin-bottom: 12px;
+  color: #718096;
+}
+
+.drop-zone strong {
+  color: #273449;
+  font-size: 16px;
+}
+
+.drop-zone span {
+  font-size: 14px;
+  color: #7b8797;
+}
+
+/* ================================
+   Selected File
+================================ */
+
+.selected-file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 18px;
+  padding: 13px;
+
+  border-radius: 10px;
+  background: #f4f8fb;
+  border: 1px solid #e0e8ef;
+}
+
+.selected-file div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  min-width: 0;
+}
+
+.selected-file strong {
+  font-size: 14px;
+  color: #334155;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selected-file span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.selected-file button {
+  border: none;
+  background: transparent;
+  color: #c45b5b;
+
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.selected-file button:hover {
+  background: #feecec;
+}
+
+/* ================================
+   Process Button
+================================ */
+
+.process-button {
+  width: 100%;
+
+  margin-top: 18px;
+  padding: 13px 18px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #3478d4;
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+.process-button:hover:not(:disabled) {
+  background: #2867bd;
+  transform: translateY(-1px);
+}
+
+.process-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ================================
+   Output Panel
+================================ */
+
+.output-panel {
+  min-width: 0;
+  min-height: 0;
+
+  height: 100%;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.output-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.output-header > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.output-header h2 {
+  font-size: 20px;
+  color: #1e293b;
+}
+
+/* ================================
+   Success Badge
+================================ */
+
+.success-badge {
+  padding: 5px 10px;
+
+  border-radius: 7px;
+
+  background: #e3f5e8;
+  color: #318047;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ================================
+   Page Tabs
+================================ */
+
+.page-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  padding: 12px 0 18px;
+
+  border-bottom: 1px solid #dce4eb;
+  margin-bottom: 18px;
+}
+
+.page-nav-button {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #d5dee7;
+  border-radius: 8px;
+
+  background: white;
+  color: #475569;
+
+  transition: all 0.2s ease;
+}
+
+.page-nav-button:hover:not(:disabled) {
+  background: #f1f6fb;
+  border-color: #3478d4;
+  color: #3478d4;
+}
+
+.page-nav-button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.page-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.page-counter input {
+  width: 58px;
+  height: 38px;
+
+  text-align: center;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+
+  background: white;
+  color: #1e293b;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  outline: none;
+}
+
+.page-counter input:focus {
+  border-color: #3478d4;
+
+  box-shadow:
+    0 0 0 3px rgba(52, 120, 212, 0.12);
+}
+
+/* Remove number input arrows */
+
+.page-counter input::-webkit-inner-spin-button,
+.page-counter input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.page-counter input[type="number"] {
+  appearance: textfield;
+}
+
+.page-tabs::-webkit-scrollbar {
+  height: 5px;
+}
+
+.page-tabs::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.page-tabs::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.page-tabs button {
+  position: relative;
+
+  flex: 0 0 auto;
+
+  padding: 10px 3px 12px;
+
+  border: none;
+  background: transparent;
+
+  color: #64748b;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.page-tabs button:hover {
+  color: #2f6fc0;
+}
+
+.page-tabs button.active {
+  color: #1f5fae;
+  font-weight: 600;
+}
+
+.page-tabs button.active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: -1px;
+
+  height: 3px;
+
+  border-radius: 3px 3px 0 0;
+
+  background: #397bc5;
+}
+
+/* ================================
+   Content Area
+================================ */
+
+.content-area {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ================================
+   Content Cards
+================================ */
+
+.content-card {
+  border-radius: 11px;
+  padding: 18px 20px;
+
+  border: 1px solid #d7e0e8;
+
+  background: white;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 17px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+}
+
+.content-card p {
+  color: #465569;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ================================
+   Text Card
+================================ */
+
+.text-card {
+  border-color: #d4dfe8;
+}
+
+.text-card .card-title {
+  color: #334155;
+}
+
+/* ================================
+   Visual Description
+================================ */
+
+.visual-card {
+  background: #faf6ff;
+  border: 2px solid #c49be8;
+}
+
+.visual-card .card-title {
+  color: #70409c;
+}
+
+.visual-card svg {
+  color: #8147b5;
+}
+
+/* ================================
+   Table Description
+================================ */
+
+.table-card {
+  background: #f5faff;
+  border-color: #cbddea;
+}
+
+.table-card .card-title {
+  color: #3a5d79;
+}
+
+.table-card svg {
+  color: #3d739c;
+}
+
+/* ================================
+   Audio Player
+================================ */
+
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-top: 22px;
+  padding: 14px 18px;
+
+  background: #ffffff;
+
+  border: 1px solid #d7e1ea;
+  border-radius: 12px;
+
+  box-shadow: 0 5px 18px rgba(50, 80, 110, 0.08);
+}
+
+.audio-info {
+  min-width: 145px;
+}
+
+.audio-info strong {
+  font-size: 13px;
+  color: #334155;
+}
+
+.audio-button {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #3478d4;
+  color: white;
+}
+
+.audio-progress {
+  flex: 1;
+  height: 5px;
+
+  background: #dce5ed;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 35%;
+  height: 100%;
+
+  background: #4386d7;
+  border-radius: 10px;
+}
+
+.audio-player > svg {
+  color: #64748b;
+}
+
+.audio-player > button:not(.audio-button) {
+  border: none;
+  background: transparent;
+
+  color: #64748b;
+  font-size: 12px;
+}
+
+.audio-player > button:not(.audio-button):hover {
+  color: #3478d4;
+}
+
+/* ================================
+   Focus Accessibility
+================================ */
+
+button:focus-visible,
+label:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(52, 120, 212, 0.35);
+  outline-offset: 2px;
+}
+
+/* ================================
+   Responsive
+================================ */
+@media (max-width: 900px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .pdf-preview {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .dashboard {
+    grid-template-columns: 340px 1fr;
+  }
+
+  .app {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 800px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .api-status {
+    font-size: 12px;
+  }
+
+  .audio-player {
+    flex-wrap: wrap;
+  }
+
+  .audio-info {
+    width: 100%;
+  }
+
+  .audio-progress {
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 500px) {
+  .app {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .upload-panel,
+  .output-panel {
+    padding: 16px;
+  }
+
+  .drop-zone {
+    min-height: 210px;
+  }
+
+  .page-tabs {
+    gap: 18px;
+  }
+}
+
+.empty-output {
+  min-height: 300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.empty-output p {
+  max-width: 400px;
+}
+
+.pdf-preview {
+  flex: 1 1 auto;
+
+  min-height: 0;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 20px;
+
+  background: #e5edf4;
+
+  border: 1px solid #d5e0e9;
+  border-radius: 14px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  box-shadow:
+    0 8px 25px rgba(58, 88, 118, 0.08);
+}
+.pdf-document {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+
+  flex: 0 0 auto;
+}
+
+.pdf-preview .react-pdf__Page {
+  max-width: 100%;
+
+  background: white;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.18);
+
+  margin-bottom: 14px;
+}
+.pdf-preview .react-pdf__Page canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+
+.pdf-status {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 300px;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+.empty-pdf {
+  justify-content: center;
+
+  text-align: center;
+
+  color: #64748b;
+}
+
+.empty-pdf p {
+  margin: 0 0 6px;
+
+  color: #334155;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.empty-pdf span {
+  font-size: 14px;
+}
+.pdf-page-info {
+  margin-top: 8px;
+
+  padding: 6px 12px;
+
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.85);
+
+  color: #475569;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.empty-pdf {
+  justify-content: center;
+
+  text-align: center;
+
+  color: #64748b;
+}
+
+.empty-pdf p {
+  font-size: 18px;
+  font-weight: 600;
+  color: #334155;
+
+  margin-bottom: 6px;
+}
+
+.empty-pdf span {
+  font-size: 14px;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.active-speed {
+  color: #3478d4 !important;
+  font-weight: 700;
+}
