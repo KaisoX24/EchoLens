@@ -90,7 +90,7 @@ async def process_pdf(file:UploadFile) -> ProcessResponse:
     
 
 @app.post('/tts')
-async def text_to_speech(payload:TTSRequest):
+def text_to_speech(payload:TTSRequest):
     safe_key = re.sub(r'[^a-zA-Z0-9_/]', '_', payload.cache_key)
     audio_url=get_or_generate_audio_url(payload.text,safe_key)
     return {'audio_url':audio_url}
