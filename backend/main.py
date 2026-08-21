@@ -84,7 +84,7 @@ async def process_pdf(file:UploadFile) -> ProcessResponse:
             page_number=i+1,
             blocks=blocks))
         
-    response=ProcessResponse(pages=pages_result)
+    response=ProcessResponse(filename=file.filename,pages=pages_result)
     save_response_cache(pdf_bytes,response)
     return response
     
