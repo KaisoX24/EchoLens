@@ -20,7 +20,7 @@ class TTSEngine:
 
     def __init__(self):
         self.pipeline = KPipeline(lang_code='a')
-        self._synth_lock = threading.Lock(
+        self._synth_lock = threading.Lock()
 
     @classmethod
     def get_instance(cls) -> "TTSEngine":
