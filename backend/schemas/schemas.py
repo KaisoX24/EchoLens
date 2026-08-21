@@ -10,7 +10,9 @@ class PageResult(BaseModel):
     blocks:list[Block]
 
 class ProcessResponse(BaseModel):
+    filename:str
     pages:list[PageResult]
+
 
 class TTSRequest(BaseModel):
     text:str
@@ -18,3 +20,4 @@ class TTSRequest(BaseModel):
 
 class DescriptionList(BaseModel):
     descriptions:list[str]
+
