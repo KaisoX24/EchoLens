@@ -4,6 +4,7 @@ from reasoning.table_describer import describe_tables_batch
 from reasoning.vision_describer import describe_images_batch
 from reasoning.text_cleaner import clean_text
 from audio.tts_generator import get_or_generate_audio_url
+from cache_responses import get_cached_response,save_response_cache
 import pymupdf
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -28,8 +29,11 @@ app.mount("/audio",StaticFiles(directory='audio_cache'),name='audio')
 async def process_pdf(file:UploadFile) -> ProcessResponse:
     "Process and return the image data"
     pdf_bytes= await file.read()
+    cached=get_cached_response(pdf_bytes)
+    if cached:
+        return cached
+    
     doc=pymupdf.open(stream=pdf_bytes,filetype='pdf')
-
     page=len(doc)
     pages_result=[]
 
@@ -80,7 +84,9 @@ async def process_pdf(file:UploadFile) -> ProcessResponse:
             page_number=i+1,
             blocks=blocks))
         
-    return ProcessResponse(pages=pages_result)
+    response=ProcessResponse(pages=pages_result)
+    save_response_cache(pdf_bytes,response)
+    return response
     
 
 @app.post('/tts')
