@@ -1,4 +1,4 @@
-from reasoning.llm_client import get_text_model
+from backend.reasoning.llm_client import get_text_model
 
 def clean_text(raw_text: str) -> str:
     model = get_text_model()
