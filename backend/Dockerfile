@@ -4,9 +4,7 @@ RUN apt-get update && apt-get install -y espeak-ng && rm -rf /var/lib/apt/lists/
 
 WORKDIR /app
 
-COPY pyproject.toml uv.lock ./
-RUN pip install uv && uv sync --frozen
-
 COPY . .
+RUN pip install uv && uv sync --frozen
 
 CMD uv run uvicorn main:app --host 0.0.0.0 --port $PORT
