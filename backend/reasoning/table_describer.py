@@ -1,5 +1,5 @@
-from reasoning.llm_client import get_table_model
-from schemas.schemas import DescriptionList
+from backend.reasoning.llm_client import get_table_model
+from backend.schemas.schemas import DescriptionList
 
 def describe_tables_batch(all_rows: list[list[list[str]]]) -> list[str]:
     if not all_rows:
