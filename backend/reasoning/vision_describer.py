@@ -1,6 +1,6 @@
 import base64
-from backend.reasoning.llm_client import get_vision_model
-from backend.schemas.schemas import DescriptionList
+from reasoning.llm_client import get_vision_model
+from schemas.schemas import DescriptionList
 from langchain.messages import HumanMessage
 
 
