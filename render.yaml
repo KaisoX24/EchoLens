@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: echolens-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: >-
+      apt-get update &&
+      apt-get install -y espeak-ng &&
+      pip install --upgrade pip uv &&
+      uv sync --frozen
+    startCommand: uv run uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY_TTS
+        sync: false
+      - key: GROQ_API_KEY_120
+        sync: false
+      - key: GROQ_API_KEY_20
+        sync: false
